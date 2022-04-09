@@ -1,0 +1,46 @@
+import 'package:flutter/material.dart';
+import 'dart:math';
+
+void main() => runApp(
+      MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'ball page',
+        home: BallPage(),
+      ),
+    );
+
+class BallPage extends StatefulWidget {
+  const BallPage({Key? key}) : super(key: key);
+  State<StatefulWidget> createState() {
+    return _BallingPage();
+  }
+}
+
+class _BallingPage extends State<BallPage> {
+  int cut = 1;
+  void clickBall() {
+    cut = Random().nextInt(3) + 1;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+        child: 
+        Scaffold(
+            appBar: AppBar(
+              title: Text('showing ball'),
+            ),
+            body: SafeArea(
+                child: Row(children: <Widget>[
+              Expanded(
+                  child: FlatButton(
+                child: Image(image: AssetImage('asset/ball$cut.png')),
+                onPressed: () {
+                  setState(() {
+                    clickBall();
+                  });
+                },
+              ))
+            ]))));
+  }
+}
